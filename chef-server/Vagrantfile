@@ -1,0 +1,9 @@
+Vagrant::Config.run do |config|
+  config.vm.box = "precise64"
+  config.vm.forward_port 4000, 4000
+  config.vm.provision :chef_solo do |chef|
+    chef.add_recipe "chef-server"
+    chef.json = {
+    }
+  end
+end
