@@ -1,0 +1,16 @@
+Vagrant::Config.run do |config|
+  config.vm.box = "precise64"
+
+  config.vm.forward_port 5672, 5672
+  config.vm.forward_port 55672, 55672
+  config.vm.forward_port 15672, 15672
+
+  config.vm.provision :chef_solo do |chef|
+    chef.add_recipe "apt"
+    chef.add_recipe "rabbitmq"
+    chef.add_recipe "rabbitmq::mgmt_console"
+    chef.json = {
+    }
+  end
+
+end
